@@ -24,7 +24,10 @@ type node[K comparable, V any] struct {
 
 func MakeLRU[K comparable, V any](cap int) *LRU[K, V] {
 	a := &LRU[K, V]{cache: map[K]*list.Element{}}
-	a.SetCap(cap)
+	if cap < 1 {
+		cap = 1
+	}
+	a.cap.Store(int32(cap))
 	return a
 }
 
