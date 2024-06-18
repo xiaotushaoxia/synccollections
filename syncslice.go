@@ -2,6 +2,7 @@ package synccollections
 
 import "sync"
 
+// Deprecated: bad implement
 type Slice[T any] struct {
 	ts []T
 	m  sync.RWMutex

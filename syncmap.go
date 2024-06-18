@@ -83,6 +83,14 @@ func (m *Map[K, V]) Range(f func(key K, value V) (shouldContinue bool)) {
 	})
 }
 
+func (m *Map[K, V]) RangeAll(f func(key K, value V)) {
+	// useful for me . but make Map[K,V] different with sync.Map
+	m.Range(func(key K, value V) bool {
+		f(key, value)
+		return true
+	})
+}
+
 func (m *Map[K, V]) Swap(key K, value V) (previous V, loaded bool) {
 	p, loaded := m.mp.Swap(key, value)
 	if loaded {
@@ -171,6 +179,14 @@ func (m *RWMutexMap[K, V]) Range(f func(key K, value V) (shouldContinue bool)) {
 			break
 		}
 	}
+}
+
+func (m *RWMutexMap[K, V]) RangeAll(f func(key K, value V)) {
+	// useful for me . but make Map[K,V] different with sync.Map
+	m.Range(func(key K, value V) bool {
+		f(key, value)
+		return true
+	})
 }
 
 func (m *RWMutexMap[K, V]) Swap(key K, value V) (previous V, loaded bool) {

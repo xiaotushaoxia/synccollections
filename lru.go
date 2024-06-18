@@ -9,6 +9,7 @@ import (
 // 但是我为了让它的零值也是可以直接使用的，就只能这样凑合一下了
 const defaultLruCap int32 = 100
 
+// Deprecated: bad implement
 type LRU[K comparable, V any] struct {
 	cache map[K]*list.Element
 	list  list.List
